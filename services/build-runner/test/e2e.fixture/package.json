@@ -7,7 +7,7 @@
     "build:cf": "next-on-pages"
   },
   "dependencies": {
-    "next": "14.2.35",
+    "next": "^15.5.21",
     "react": "18.3.1",
     "react-dom": "18.3.1"
   },
@@ -23,6 +23,19 @@
     "js-yaml": "^4.3.1",
     "nanoid@3": "^3.3.18",
     "postcss": "^8.5.23",
-    "undici@7": "^7.29.0"
+    "undici@7": "^7.29.0",
+    "tar": "^7.5.21",
+    "ws": "^8.21.0",
+    "form-data": "^4.0.6",
+    "minimatch@10": "^10.2.3",
+    "brace-expansion@1": "^1.1.18",
+    "brace-expansion@5": "^5.0.9",
+    "cookie": "^0.7.0",
+    "@tootallnate/once": "^2.0.1",
+    "srvx": "^0.11.13",
+    "undici@5": "^5.29.0",
+    "undici@6": "^6.28.0",
+    "sharp": "^0.35.0",
+    "esbuild@0.15": "^0.25.0"
   }
 }
