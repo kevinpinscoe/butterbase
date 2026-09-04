@@ -4,8 +4,8 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 const { mockSend } = vi.hoisted(() => ({ mockSend: vi.fn() }));
 
 vi.mock('@aws-sdk/client-ses', () => ({
-  SESClient: vi.fn().mockImplementation(() => ({ send: mockSend })),
-  SendEmailCommand: vi.fn().mockImplementation((input) => input),
+  SESClient: vi.fn().mockImplementation(function () { return { send: mockSend }; }), // Vitest 4: constructor mocks need `function`, not an arrow
+  SendEmailCommand: vi.fn().mockImplementation(function (input) { return input; }),
 }));
 
 import { sendSuggestionStatusUpdateEmail } from '../email-service.js';

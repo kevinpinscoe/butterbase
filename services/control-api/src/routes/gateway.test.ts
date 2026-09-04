@@ -611,7 +611,13 @@ const primaryAdapterArgs: unknown[] = [];
 const secondaryAdapterArgs: unknown[] = [];
 const tertiaryAdapterArgs: unknown[] = [];
 
-vi.mock('../../../../cloud-overlays/dist/cloud-overlays/bootstrap.js', () => ({
+// The overlay module does not exist in the OSS checkout, so Vite cannot resolve
+// gateway.ts's `import('../../../../cloud-overlays/...')`. Vitest 4's module
+// runner then keys the unresolved import against the Vite root as
+// '/cloud-overlays/dist/cloud-overlays/bootstrap.js', and the mock has to be
+// registered under that same id (a relative path here resolves against this
+// test file and never matches). Vitest 3 matched the relative form.
+vi.mock('/cloud-overlays/dist/cloud-overlays/bootstrap.js', () => ({
   providerPrimaryAdapter: vi.fn((opts: unknown) => { primaryAdapterArgs.push(opts); return { _kind: 'primary' }; }),
   providerSecondaryAdapter: vi.fn((opts: unknown) => { secondaryAdapterArgs.push(opts); return { _kind: 'secondary' }; }),
   providerTertiaryAdapter: vi.fn((opts: unknown) => { tertiaryAdapterArgs.push(opts); return { _kind: 'tertiary' }; }),

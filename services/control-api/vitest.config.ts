@@ -10,12 +10,7 @@ export default defineConfig({
     // hackathons_only_one_active unique partial index. singleFork serialises
     // all spec files so only one is running against the shared control DB at
     // a time.
-    pool: 'forks',
-    poolOptions: {
-      forks: {
-        singleFork: true,
-      },
-    },
+    maxWorkers: 1,
     testTimeout: 30000,
     hookTimeout: 30000,
     exclude: [
