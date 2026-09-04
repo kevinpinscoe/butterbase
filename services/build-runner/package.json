@@ -15,7 +15,7 @@
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250101.0",
     "@types/adm-zip": "^0.5.7",
-    "adm-zip": "^0.5.16",
+    "adm-zip": "^0.6.0",
     "typescript": "^5.6.0",
     "vitest": "^3.1.1",
     "wrangler": "^4.84.1"

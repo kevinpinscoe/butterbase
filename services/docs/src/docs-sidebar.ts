@@ -60,7 +60,7 @@ export const sidebar: StarlightUserConfig['sidebar'] = [
   },
   {
     label: 'API Reference',
-    autogenerate: { directory: 'api-reference' },
+    items: [{ autogenerate: { directory: 'api-reference' } }],
   },
   {
     label: 'Reference',

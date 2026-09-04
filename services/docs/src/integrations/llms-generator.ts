@@ -6,7 +6,9 @@ import { fileURLToPath } from 'node:url';
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
-type SidebarItem = { label: string; slug: string };
+type SidebarItem =
+  | { label: string; slug: string }
+  | { autogenerate: { directory: string } }; // Starlight >= 0.39 nests autogenerate inside `items`
 type SidebarGroup =
   | { label: string; items: SidebarItem[] }
   | { label: string; autogenerate: { directory: string } };
@@ -51,6 +53,10 @@ export function resolveSidebarItems(sidebar: Sidebar, docsDir: string): Resolved
   for (const group of sidebar) {
     if ('items' in group) {
       for (const item of group.items) {
+        if ('autogenerate' in item) {
+          items.push(...resolveAutogenerate(group.label, item.autogenerate.directory, docsDir));
+          continue;
+        }
         const mdPath = join(docsDir, `${item.slug}.md`);
         const mdxPath = join(docsDir, `${item.slug}.mdx`);
         let filePath: string | undefined;
@@ -68,7 +74,19 @@ export function resolveSidebarItems(sidebar: Sidebar, docsDir: string): Resolved
         items.push({ group: group.label, label: item.label, slug: item.slug, filePath });
       }
     } else if ('autogenerate' in group) {
-      const dir = join(docsDir, group.autogenerate.directory);
+      items.push(...resolveAutogenerate(group.label, group.autogenerate.directory, docsDir));
+    }
+  }
+
+  return items;
+}
+
+/** Resolve an autogenerate directory to its pages, sorted alphabetically. */
+function resolveAutogenerate(groupLabel: string, directory: string, docsDir: string): ResolvedItem[] {
+  const items: ResolvedItem[] = [];
+  {
+    {
+      const dir = join(docsDir, directory);
       let files: string[];
 
       try {
@@ -94,8 +112,8 @@ export function resolveSidebarItems(sidebar: Sidebar, docsDir: string): Resolved
 
         // Use the frontmatter title for accuracy (handles acronyms like "AI API", "MCP Tools")
         const label = parseFrontmatterTitle(raw) ?? file.replace(/\.mdx?$/, '');
-        const slug = `${group.autogenerate.directory}/${file.replace(/\.mdx?$/, '')}`;
-        items.push({ group: group.label, label, slug, filePath });
+        const slug = `${directory}/${file.replace(/\.mdx?$/, '')}`;
+        items.push({ group: groupLabel, label, slug, filePath });
       }
     }
   }
