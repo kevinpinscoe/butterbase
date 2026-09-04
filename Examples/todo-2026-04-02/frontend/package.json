@@ -13,7 +13,7 @@
     "@butterbase/sdk": "file:../../../packages/sdk",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "react-router-dom": "^7.13.2"
+    "react-router-dom": "^7.18.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
@@ -28,5 +28,12 @@
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.57.0",
     "vite": "^8.0.1"
+  },
+  "overrides": {
+    "@humanfs/node": "^0.16.8",
+    "browserslist": "^4.28.7",
+    "js-yaml": "^4.3.1",
+    "nanoid@3": "^3.3.18",
+    "postcss": "^8.5.23"
   }
 }
