@@ -15,3 +15,18 @@ stress_test_results*
 # Repo uses npm + package-lock.json; ignore stray pnpm lockfiles created
 # when someone runs `pnpm install` in a workspace.
 pnpm-lock.yaml
+
+# Local AI/editor/OS artifacts (kevinpinscoe fork hygiene)
+**/resume.sh
+**/resume.txt
+**/.claude
+**/.claude/settings.local.json
+**/.codex
+**/.trash/
+**/ai-wt/
+**/.obsidian/workspace.json
+**/.obsidian/graph.json
+**/.obsidian/plugins/*/data.json
+**/*.swp
+**/Thumbs.db
+**/*.pyo
