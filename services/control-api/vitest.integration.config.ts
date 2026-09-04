@@ -6,12 +6,7 @@ import { defineConfig } from 'vitest/config';
 // `npm run e2e:bootstrap && npm run test:integration` from the repo root.
 export default defineConfig({
   test: {
-    pool: 'forks',
-    poolOptions: {
-      forks: {
-        singleFork: true,
-      },
-    },
+    maxWorkers: 1,
     testTimeout: 30000,
     hookTimeout: 30000,
     include: [
